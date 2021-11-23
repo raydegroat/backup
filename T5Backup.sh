@@ -19,14 +19,16 @@ then
 
 					 # Create an archive name using hostname, 
 	day=$(date +%A)			 # day of week, and ending with .tgz
-	hostname=$(hostname -s)
-	archive_name="$hostname-$day.tgz" 
+	short_hostname=$(hostname -s)
+	archive_name="$short_hostname-$day.tgz" 
 
 	echo "Archiving and compressing  $source_file to $dest_path/$archive_name"
 	date
 	echo
 				         # Create a gzip tar archive 
 	tar czf $dest_path/$archive_name $source_file
+	echo "Acrhive complete!"
+	echo
 
 	echo "Encrypting $archive_name"
 	echo	 
@@ -35,10 +37,14 @@ then
 	
 	echo "The file is encrypted. Deleting unencrypted archive..."
 	echo
+					 # Delete the unencrypted archive file
 	rm -f $dest_path/$archive_name
+
 	echo "Backup and encrypt complete!"
 	date
+	
 	break
+
 else					 # Restore - Determin source and destination
 	read -p "Enter path to encrypted backup file to restore from: " restore_file 
 	read -p "Enter the path to restore to: " dest_path
@@ -71,8 +77,12 @@ else					 # Restore - Determin source and destination
    	
 	echo "Unarchive complete!"
 	echo
+	
 	echo "Cleaning up..."
-	echo 
+	echo
+					 # Delete the unencrypted archive file
+	rm -f $dest_path/temp_decrypted.tgz
+	
 	echo "Restore finished."
 	date
 	break
@@ -80,3 +90,5 @@ fi
 done
 # Long listing of files in $dest to check file sizes.
 ls -lh $dest_path
+echo
+
