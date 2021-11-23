@@ -5,11 +5,11 @@
 #
 ####################################
 
-# What to backup. 
-backup_files="/home /var/spool/mail /etc /root /boot /opt"
+# What to backup. --Anwar added
+read -p "Enter the files or folders with path to backup: " backup_files
 
-# Where to backup to.
-dest="/mnt/backup"
+# Where to backup to. -- Anwar added
+read -p "Enter the destination path where to backup to: " dest
 
 # Create archive filename.
 day=$(date +%A)
