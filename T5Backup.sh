@@ -48,9 +48,8 @@ else
 	date
 	echo
 	# To see the listing of archive contents
-	arc_cont=$(tar -tf $restore_files)
-	echo "contents of the archive files are: $arc_cont"
-	echo
+	# arc_cont=$(tar -tf $restore_files)
+	# echo "contents of the archive files are: $arc_cont"
 	# Restore the files using tar.
 	# Future error hadling and robustness
 	#if [ -f "$File" ]; then 
