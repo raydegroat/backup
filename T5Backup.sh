@@ -33,20 +33,22 @@ then
 	gpg -c $dest/$archive_file
 	
 
-	echo "The file is encrypted" # Script should first verify sucess  before echoing 
+	echo "The file is encrypted. Deleting unencrypted archive..."
+	rm -f $dest/$archive_file
+	# Script should first verify sucess  before echoing sucess
 	# Print end status message.
 	echo
-	echo "Backup finished"
+	echo "Backup and encrypt finished!"
 	date
 	break
 else
-	read -p "Enter the backup file to restore: " restore_files 
+	read -p "Enter the encrypted backup file to restore: " restore_files 
 	read -p "Enter the path to restore to: " dest
-	
 	# Print start status message.
 	echo "Restoring $restore_files to $dest"
 	date
 	echo
+	gpg -d --output $dest/output.tgz $restore_files
 	# To see the listing of archive contents
 	# arc_cont=$(tar -tf $restore_files)
 	# echo "contents of the archive files are: $arc_cont"
@@ -58,7 +60,7 @@ else
 	#else
    	
 	# Extract backup files
-	tar -xzvf $restore_files -C $dest
+	tar -xzvf $dest/output.tgz -C $dest
    	
 	# -C  option to tar redirects the extracted files to the specified directory.
 	#fi
