@@ -1,4 +1,4 @@
-# Edugrade Linux DevOps Eng, Linux 2, team project.
+# Edugrade Linux DevOps Eng, Linux 2, project
 
 Team members: Julian Bergman, Raymond de Groat, Anwar Hossain, Tom Öst
 
